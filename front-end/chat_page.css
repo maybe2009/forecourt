@@ -1,0 +1,115 @@
+
+* {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: rgb(223, 221, 219);
+}
+
+
+
+body {
+    width: 100%;
+    --chat-color-sender: #8ac0d9;
+    --chat-color-receiver: rgb(50, 231, 26);
+}
+
+.chat-page {
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    /* display: table; */
+}
+
+.chat-message {
+    display: table; 
+    overflow: hidden;
+    margin: 0.2rem;
+}
+
+/* 消息 */
+.message-content p {
+    color: black;
+    /* border-top: 1px solid; */
+    margin: 0;
+    position: relative;
+    /* overflow: scroll; */
+}
+
+/* 消息和头像布局*/
+.msg-sender {
+    float: left;
+    clear: both;
+}
+.msg-receiver {
+    float: right;
+    clear: both;
+}
+.chat-message.msg-sender .avatar {
+    float: left;
+}
+.chat-message.msg-sender .message-content {
+    float: left;
+}
+.chat-message.msg-receiver .message-content {
+    float: left;
+}
+.chat-message.msg-receiver .avatar {
+    float: right;
+}
+/* 圆角消息框 */
+.message-content p {
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+/* 颜色 */
+ .chat-message.msg-receiver p {
+    background: var(--chat-color-receiver);
+} 
+.chat-message.msg-sender p {
+    background: var(--chat-color-sender);
+}
+
+/* 头像 */
+.avatar {
+    width: 35px;
+    height: 35px;
+}
+
+.left_triangle{
+    height:0;
+    width:0;
+    float: left;
+    border-width:7px;
+    border-style:solid;
+    border-color:transparent var(--chat-color-sender) transparent transparent;
+    position:relative;
+    top: 9px;
+}
+
+.right_triangle{
+    height:0;
+    width:0;
+    float: right;
+    border-width:7px;
+    border-style:solid;
+    border-color:transparent transparent transparent var(--chat-color-receiver);
+    position:relative;
+    top: 9px;
+}
+
+.input-box {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 0.5rem;
+    width: 50%;
+}
+
+.chat-window-message {
+    width: 100%;
+    background-color: white;
+}
+
+.send-button {
+    display: inline;
+}

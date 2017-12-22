@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="chat_page.css">
+</head>
+
+<body>
+    <form action="/register" method="POST">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="user_name" />
+        </div>
+        <div>
+            <label for="mail">E-mail:</label>
+            <input type="email" id="mail" name="user_mail" />
+        </div>
+        <div>
+            <label for="avatar">Avatar:</label>
+            <input type="file" id="avatar" name="user_avatar" accept="image/*" onchange="uploadAvatar(this.files)" />
+        </div>
+        <div>
+            <canvas id="avatar-preview" width="150", height="150">你的浏览器不支持canvas，换一个吧</canvas>
+        </div>
+        <div>
+            <button type="submit">SIGN IN</button>
+        </div>
+    </form>
+</body>
+<script type="text/javascript" src="sign_in.js"></script>
+</html>

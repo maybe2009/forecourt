@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="chat_page.css">
+</head>
+
+<body>
+    <div class='chat-page' id="chat-page">
+        <div class='chat-message msg-sender'>
+            <img class='avatar' src='/assets/coolgirl.jpg' />
+            <div class="left_triangle"></div>
+            <div class='message-content'>
+                <p id='msg-data'>Pizza?</p>
+            </div>
+        </div>
+
+        <div class='chat-message msg-receiver'>
+            <img class='avatar' src='/assets/coolboy.jpg' />
+            <div class="right_triangle"></div>
+            <div class='message-content'>
+                <p id='msg-data'>Sushi tonight?</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="clear:both"></div>
+    <table class="input-box">
+        <tr>
+            <td><input class="chat-window-message" id="input-box" type="text" placeholder="Type here..."/></td>
+            <td><input class="send-button" id="input-button" type="button" value="Send"/></td>  
+        </tr>
+    </table>
+</body>
+<script type="text/javascript" src=chat_page.js></script>
+</html>
