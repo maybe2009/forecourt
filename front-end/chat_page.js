@@ -1,43 +1,67 @@
-'use strict'
-var input_box = document.getElementById('input-box');
-var input_button = document.getElementById('input-button');
-var chat_page = document.getElementById("chat-page");
+'use strict';
 
-var receiver_msg_node_template = document
-.getElementsByClassName('msg-receiver')[0];
-var sender_msg_node_template = document
-.getElementsByClassName('msg-sender')[0];
+var tplSendMsgNode =
+    "        <div class='chat-message msg-sender'>\n" +
+    "            <img class='avatar' src='{{avatarUrl}}' />\n" +
+    "            <div class='left_triangle'></div>\n" +
+    "            <div class='message-content'>\n" +
+    "                <p>{{message}}</p>\n" +
+    "            </div>\n" +
+    "        </div>";
 
-var ws = new WebSocket("ws://172.26.70.35:7758")
+var tplReceiveMsgNode =
+    "        <div class='chat-message msg-sender'>\n" +
+    "            <img class='avatar' src='{{avatarUrl}}' />\n" +
+    "            <div class='right_triangle'></div>\n" +
+    "            <div class='message-content'>\n" +
+    "                <p>{{message}}</p>\n" +
+    "            </div>\n" +
+    "        </div>";
 
-input_button.onclick= function(){
-    console.log('send msg: ' + input_box.value);
-    onInputMsg(input_box.value);
-}
+var ws = new WebSocket("ws://localhost:7758")
+
+$('#input-button').click(function() {
+    var input_box = $('#input-box');
+    console.log('send msg: ' + input_box.val());
+    onSendMsg(input_box.val());
+});
 
 ws.onopen = function(evt) {
     console.log("Connection open...");
-}
+};
 
 ws.onmessage = function(evt) {
     console.log("Received message: " + evt.data);
     onReceiveMsg(evt.data);
+};
+
+function addSendMsgNode(data) {
+    var rendered = Mustache.render(tplSendMsgNode, data);
+    console.log(rendered);
+    $('#chat-page').append(rendered);
 }
 
-function onInputMsg(content) {
-    var new_node = receiver_msg_node_template.cloneNode(true);
-    addMsgNode(new_node, content);   
+function addReceiveMsgNode(data) {
+    var rendered = Mustache.render(tplReceiveMsgNode, data);
+    $('#chat-page').append(rendered);
+}
+
+function onSendMsg(content) {
+    var nodeInfo = {
+        'avatarUrl' : 'example.jpg',
+        'message' : content
+    };
+
+    addSendMsgNode(nodeInfo);
     sendNewMsgToServer(content);
 }
 
 function onReceiveMsg(content) {
-    var new_node = sender_msg_node_template.cloneNode(true);
-    addMsgNode(new_node, content);
-}
-
-function addMsgNode(node, content) {
-    node.getElementsByTagName('p')[0].innerHTML = content;
-    chat_page.appendChild(node);
+    var nodeInfo = {
+        'avatarUrl' : 'example.jpg',
+        'message' : content
+    };
+    addReceiveMsgNode(nodeInfo)
 }
 
 function sendNewMsgToServer(msg) {
